@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      header {
+          display: flex;
+        background-color: #3d3939;
+      }
+      a {
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 10px;
+      }
+      a:last-of-type{
+        margin-left: auto;
+      }
+      a:hover {
+          background-color: #fff;
+          color: #3d3939;
+        }
+      footer{
+          justify-content: bottom;
+          text-align: center;
+      }
+      .container{
+        margin: 0 auto;
+        width: 80%;
+      }
+      .innerbox{
+        display: flex;
+        justify-content: space-evenly;
+      }
+      img{
+          width: 100%;
+          margin: 10px;
+          border-radius: 2%;
+          filter: drop-shadow(0px 0px 5px #000);
+      }
+      @media screen and (max-width: 600px) {
+        .container{
+          width: 80%;
+        }
+        .innerbox{
+          flex-direction: column;
+        }
+      }
+      h1{
+          text-align: center;
+          padding: 0%;
+          margin: 0%;
+      }
+    </style>
+  </head>
+  <body>
+      <!--first text-->
+      <h1>Responsive web gallery</h1>
+      <!-- header below-->
+    <header>
+      <a href="#">link 1 </a>
+      <a href="#">link 2 </a>
+      <a href="#">link 3 </a>
+      <a href="#">link 4 </a>
+    </header>
+    <!-- main content goes below-->
+<main>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error expedita laboriosam quis quisquam porro, exercitationem deserunt omnis culpa quae fugit neque illum tempora? Amet magni nisi corporis esse, veritatis consectetur!</p>
+<div class="container">
+    <div class="innerbox">
+    <img src="https://picsum.photos/536/349?random=1" alt="">
+    <img src="https://picsum.photos/536/349?random=2" alt="">
+    <img src="https://picsum.photos/536/349?random=3" alt="">
+</div>
+<div class="innerbox">
+    <img src="https://picsum.photos/536/349?random=4" alt="">
+    <img src="https://picsum.photos/536/349?random=5" alt="">
+    <img src="https://picsum.photos/536/349?random=6" alt="">
+</div>
+<div class="innerbox">
+    <img src="https://picsum.photos/536/349?random=7" alt="">
+    <img src="https://picsum.photos/536/349?random=8" alt="">
+    <img src="https://picsum.photos/536/349?random=9" alt="">
+    </div>
+</div>
+</main>
+
+<!--footer goes below-->
+<footer>
+    <p>footer goes here or something idk</p>
+</footer>
+    </div>
+  </body>
+</html>
