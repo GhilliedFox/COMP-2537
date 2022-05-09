@@ -84,7 +84,7 @@ function createPokemonCardByType(pokemon) {
     `;
     // if the a tag is clicked, the pokemon profile will be displayed
     poke_card.addEventListener("click", function () {
-      getPokemonOnClick(pokemon.id);
+      getPokemonOnClick(pokemon.pokemon[i].pokemon.name);
     });
     poke_card.innerHTML = poke_cardHTML;
     poke_container.appendChild(poke_card);
