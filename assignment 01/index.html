@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Koulen" />
+    <style>
+        * {
+	box-sizing: border-box;
+}
+      header {
+          text-align: center;
+          width: 100%;
+      }
+      footer{
+          justify-content: bottom;
+          text-align: center;
+      }
+      body{
+        background-image: url(./images/background.png);
+        display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	    justify-content: center;
+      }
+      .poke_container {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+    }
+    .pokemon {
+        background-color: #eee;
+        border-radius: 20px;
+        box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+        margin: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .pokemon .poke-card-img img {
+        margin-top: 20px;
+        max-width: 90%;
+        height: 150px;
+        width: 150px;
+    }
+      h3, h2, h1, p{
+        text-transform: capitalize;
+        text-align: center;
+      }
+      li{
+          display: inline-block;
+          list-style: none;
+          height: 60px;
+          line-height: 60px;
+          padding: 0 40px;
+      }
+      nav {
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      font-size: xx-large;
+      font-family: 'Koulen', sans-serif;
+    }
+    nav a {
+      flex-grow: 1;
+      text-align: center;
+      padding: 1em;
+      position: relative;
+      color: black;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      transform: scaleX(0);
+      background: rgb(0, 0, 0);
+      transition: 0.7s transform cubic-bezier(0.06, 0.9, 0.28, 1);
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+    li {
+      text-align: center;
+    }
+    li:hover {
+      color: cadetblue;
+    }
+    a{
+      color: white;
+    }
+    main{
+        width: 80%;
+    }
+    </style>
+  </head>
+  <body>
+      <!-- header below-->
+    <header>
+      <img src="./images/pokemonLogo.png" alt="pokemon logo" />
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a href="pokedex.html">Pokedex</a>
+            </li>
+        </nav>
+    <!-- main content goes below-->
+<main>
+<div id="poke_container" class="poke_container">
+
+</div>
+</main>
+
+<!--footer goes below-->
+<footer>
+    <p>Richard Pokedex 2022</p>
+</footer>
+    </div>
+  </body>
+  <script src='./home.js'></script>
+</html>
