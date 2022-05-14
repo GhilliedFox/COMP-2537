@@ -103,3 +103,6 @@ app.get("/timeline/remove/:id", function (req, res) {
     }
   );
 });
+app.post("/timeline2", (request, response) => {
+  console.log(request);
+});

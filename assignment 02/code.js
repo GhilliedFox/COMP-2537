@@ -217,7 +217,7 @@ function insertSearchEventToTheTimeLine(poke_type) {
     url: "http://localhost:5000/timeline/insert",
     type: "put",
     data: {
-      text: ` Client has serched for ${poke_type}`,
+      text: ` Client has searched for ${poke_type}`,
       time: "at time"`${now}`,
       hits: 1,
     },
@@ -226,3 +226,18 @@ function insertSearchEventToTheTimeLine(poke_type) {
     },
   });
 }
+
+async function setup() {
+  await init_menu();
+  insertSearchEventToTheTimeLine(poke_type);
+}
+
+const data = { now, poke_type };
+const options = {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data),
+};
+fetch("/timeline2", options);
+
+$(document).ready(setup);
