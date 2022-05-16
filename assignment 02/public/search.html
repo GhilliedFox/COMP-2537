@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Koulen" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./search.js"></script>
+    <style>
+      /*progress bar from: https://codepen.io/chriscoyier/pen/eYBOvJB*/
+              * {
+	box-sizing: border-box;
+}
+      header {
+          text-align: center;
+          width: 100%;
+      }
+      footer{
+          justify-content: bottom;
+          text-align: center;
+      }
+      img{
+          border-radius: 2%;
+          margin: 10px;
+          max-width: 100%;
+      }
+      body{
+        background-image: url(./images/background.png);
+      }
+      .filter_container{
+        display: flex;
+        flex-direction: row;
+        margin: 7vh 0 5vh;
+        gap: 0 4vw;
+        align-items: center;
+        justify-content: center;
+      }
+      .filter_items{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Koulen', sans-serif;
+        font-size: 12px;
+        transform: scale(1.5);
+      }
+      .poke_container {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    }
+    @media screen and (max-width: 800px) {
+        .poke_container {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+        }
+    }
+    .pokemon {
+        background-color: #eee;
+        border-radius: 20px;
+        box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+        margin: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .pokemon .poke-card-img img {
+        margin-top: 20px;
+        max-width: 90%;
+        height: 150px;
+        width: 150px;
+      }
+      .poke-card-info h3, h2, h1, p{
+        text-transform: capitalize;
+        text-align: center;
+      }
+      .poke_profile img{
+        z-index: 100 !important;
+        max-width: 85%;
+        height: auto;
+        padding-top: 10px;
+      }
+      .poke-profile-info{
+        align-items: center;
+        flex-direction: column;
+      }
+      .poke-profile-info h3, h2, h1, p{
+        text-transform: capitalize;
+      }
+      .poke-profile-img h1{
+        font-size: xx-large;
+        text-transform: uppercase;
+      }
+      .poke-profile-stats{
+        align-items: center;
+        flex-direction: column;
+      }
+      .poke-stat-container{
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .meter {
+  box-sizing: content-box;
+  height: 10px; /* Can be anything */
+  position: relative;
+  background: #555;
+  border-radius: 25px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+.meter > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(43, 194, 83);
+  background-image: linear-gradient(
+    center bottom,
+    rgb(43, 194, 83) 37%,
+    rgb(84, 240, 84) 69%
+  );
+  box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+.meter > span:after,
+.animate > span > span {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  z-index: 1;
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+}
+
+.animate > span:after {
+  display: none;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+.red > span {
+  background-image: linear-gradient(#f0a3a3, #f42323);
+}
+.orange > span {
+  background-image: linear-gradient(#f1a165, #f36d0a);
+}
+    </style>
+  </head>
+  <body>
+      <!-- header below-->
+    <header>
+      <img src="./images/pokemonLogo.png" alt="pokemon logo" />
+    </header>
+    <!-- main content goes below-->
+<main>
+<div class="filter_container">
+  <div class="filter_items">
+    <div>Region</div>
+    <select id="region">
+      <option value="kanto">Kanto</option>
+      <option value="johto">Johto</option>
+      <option value="hoenn">Hoenn</option>
+      <option value="sinnoh">Sinnoh</option>
+      <option value="unova">Unova</option>
+      <option value="kalos">Kalos</option>
+      <option value="alola">Alola</option>
+    </select>
+  </div>
+    <div class="filter_items">
+    <div>Type</div>
+    <select id="poke_type">
+      <option value="all">All</option>
+      <option value="fire">Fire</option>
+      <option value="water">Water</option>
+      <option value="grass">Grass</option>
+      <option value="electric">Electric</option>
+      <option value="ice">Ice</option>
+      <option value="fighting">Fighting</option>
+      <option value="poison">Poison</option>
+      <option value="ground">Ground</option>
+      <option value="flying">Flying</option>
+      <option value="psychic">Psychic</option>
+      <option value="bug">Bug</option>
+      <option value="rock">Rock</option>
+      <option value="ghost">Ghost</option>
+      <option value="dragon">Dragon</option>
+      <option value="dark">Dark</option>
+      <option value="steel">Steel</option>
+      <option value="fairy">Fairy</option>
+    </select>
+  </div>
+  <div class="filter_items">
+    <label>Search</label>
+    <input type="text" value="" id="search" />
+  </div>
+  <div class="filter_items">
+    <label>.</label>
+  <button class="btn-search" id="search-btn" onclick="buttonPressed()" >
+    <i class="fas fa-search" aria-hidden="true"></i>Search
+  </button>
+  </div>
+  <div class="filter_items">
+    <label>.</label>
+    <a href="/timeline.html">Timeline</a>
+  </div>
+</div>
+<div id="poke_container" class="poke_container">
+
+</div>
+</main>
+
+<!--footer goes below-->
+<footer>
+    <p>Richard Pokedex 2022</p>
+</footer>
+    </div>
+  </body>
+</html>
