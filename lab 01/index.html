@@ -27,16 +27,18 @@
           text-align: center;
       }
       .container{
-        margin: 0 auto;
-        width: 80%;
+        display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
       }
       .innerbox{
-        display: flex;
-        justify-content: space-evenly;
+        flex: 0 32%;
+        height: 100px;
+  margin-bottom: 2%;
       }
       img{
           width: 100%;
-          margin: 10px;
+          /* margin: 10px; */
           border-radius: 2%;
           filter: drop-shadow(0px 0px 5px #000);
       }
