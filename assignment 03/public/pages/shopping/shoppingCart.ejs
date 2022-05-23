@@ -16,18 +16,28 @@
       }
       body {
         background-image: url(pages/images/background.png);
+      }
+      .poke_container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .pokemon {
+        height: 350px;
+        width: 100%;
       }
     </style>
   </head>
   <body>
     <!-- items added to cart-->
-    <div class="cart"></div>
+    <div id="poke_container" class="poke_container"></div>
     <!-- checkout button-->
-    <button class="checkout">Checkout</button>
+    <div class="total" id="total"></div>
+    <div>
+      <button class="checkout">Checkout</button>
+    </div>
   </body>
   <script src="pages/shopping/shoppingCart.js"></script>
 </html>

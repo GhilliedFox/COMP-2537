@@ -66,7 +66,7 @@ function createPokemonCard(pokemon) {
   <div class="poke-card-info">
     <h2>${pokemon.name}</h3>
     <h3>type: ${pokemon.types[0].type.name}</h3>
-    <h3>Price $${pokemon.stats[0].base_stat}
+    <h3>Price $${pokemon.id}
   </div>
   <div class="addToCart"><button onclick="" id="pokemonClicked">Add to Cart</button></div>
       `;
@@ -85,14 +85,15 @@ const getPokemonOnClick = async (query) => {
   const pokemon = await response.json();
   console.log(pokemon);
   console.log(pokemon.name);
+  // create an array in local storage and add pokemon id to it
+  var cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart == null) {
+    cart = [];
+  }
+  cart.push(pokemon.id);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  console.log(cart);
 };
-
-function createPokemonImage(pokeID, innerbox) {
-  let pokemonImage = document.createElement("img");
-  pokemonImage.src = "https://pokeapi.co/api/v2/pokemon/" + pokeID + "/";
-  pokemonImage.className = "pokemon-image";
-  innerbox.appendChild(pokemonImage);
-}
 
 function buttonPressed() {
   //clear the container

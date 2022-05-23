@@ -11,7 +11,7 @@ const router = express.Router();
 // You would query the "/api/v1/report" GET endpoint
 
 // shopping
-router.post("/cart", ShoppingCartController.shoppingCart);
+router.post("/cart/shoppingCart", ShoppingCartController.shoppingCart);
 // User
 router.get("/user", UserController.fetchAllAccounts);
 router.get("/user/id/:id", UserController.fetchUserById);

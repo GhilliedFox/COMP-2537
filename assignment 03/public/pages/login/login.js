@@ -9,11 +9,18 @@
 
     const email = emailRef.value;
     const password = passwordRef.value;
+    var loginTime = new Date(Date.now());
+    var formatted =
+      loginTime.getHours() +
+      ":" +
+      loginTime.getMinutes() +
+      ":" +
+      loginTime.getSeconds();
 
     fetch("/api/v1/user/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, loginTime }),
     })
       .then((data) => data.json())
       .then((data) => {
