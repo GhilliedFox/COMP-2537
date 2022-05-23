@@ -1,11 +1,14 @@
-const { UserModel } = require('../models/user.model');
+const { UserModel } = require("../models/user.model");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const fetchAllAccounts = async (req, res) => {
   const { uid } = req.session;
 
   const user = await UserModel.findById(uid);
 
-  if (!user?.roles.includes('admin')) return res.status(403).json({ success: false });
+  if (!user?.roles.includes("admin"))
+    return res.status(403).json({ success: false });
 
   const users = await UserModel.find({}, { __v: 0 });
 
@@ -20,12 +23,13 @@ const fetchUserById = async (req, res) => {
 
   const [user] = await UserModel.find({ _id: id });
 
-  if (!user) return res.status(500).json({ 
-    success: false, 
-    data: {
-      msg: 'User does not exist or could not be found.',
-    },
-  });
+  if (!user)
+    return res.status(500).json({
+      success: false,
+      data: {
+        msg: "User does not exist or could not be found.",
+      },
+    });
 
   res.status(200).json({
     success: true,
@@ -41,24 +45,22 @@ const fetchUserById = async (req, res) => {
 
 const register = async (req, res) => {
   // TODO: Administrators need a special sign-up process, perhaps an admin token could be supplied with the request?
-  const { email, password, age, gender } = req.body;
+  const { email, password } = req.body;
 
-  const user = new UserModel({ 
+  const user = new UserModel({
     email: email.trim(),
     password: password.trim(),
-    age: Number(age),
-    gender: gender.trim(),
-    roles: ['member']
+    roles: ["member"],
   });
 
   await user.save();
 
   res.status(200).json({
     success: true,
-    msg: 'Account successfully created.',
-    roles: ['member'],
+    msg: "Account successfully created.",
+    roles: ["member"],
   });
-}
+};
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -71,14 +73,14 @@ const login = async (req, res) => {
 
     res.status(200).json({
       data: {
-        msg: 'Login successful!',
+        msg: "Login successful!",
         uid: user._id,
       },
       success: true,
     });
   } else {
     res.status(200).json({
-      msg: 'Could not find account.',
+      msg: "Could not find account.",
       success: false,
     });
   }
@@ -89,17 +91,25 @@ const logout = (req, res) => {
   req.session.uid = null;
 
   res.status(200).json({
-    msg: 'User has been logged out',
+    msg: "User has been logged out",
     success: true,
   });
 };
 
 const renderLoginPage = (req, res) => {
-  res.render('pages/login/login.ejs');
+  res.render("pages/login/login.ejs");
 };
 
 const renderRegistrationPage = (req, res) => {
-  res.render('pages/register/register.ejs');
+  res.render("pages/register/register.ejs");
 };
 
-module.exports = { fetchAllAccounts, fetchUserById, login, logout, register, renderLoginPage, renderRegistrationPage };
+module.exports = {
+  fetchAllAccounts,
+  fetchUserById,
+  login,
+  logout,
+  register,
+  renderLoginPage,
+  renderRegistrationPage,
+};

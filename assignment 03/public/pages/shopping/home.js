@@ -1,4 +1,8 @@
 const poke_container = document.getElementById("poke_container");
+const searchButton = document.getElementById("search-btn");
+const pokemonClicked = document.getElementById("pokemonClicked");
+const result = document.getElementById("#result");
+var pokemon = {};
 
 var now = new Date(Date.now());
 var formatted =
@@ -62,12 +66,26 @@ function createPokemonCard(pokemon) {
   <div class="poke-card-info">
     <h2>${pokemon.name}</h3>
     <h3>type: ${pokemon.types[0].type.name}</h3>
+    <h3>Price $${pokemon.stats[0].base_stat}
   </div>
-  <div class="addToCart"><button>Add to Cart</button></div>
+  <div class="addToCart"><button onclick="" id="pokemonClicked">Add to Cart</button></div>
       `;
+  // if the button is clicked, the pokemon will be added to the cart
+  poke_card.addEventListener("click", function () {
+    console.log("button clicked");
+    getPokemonOnClick(pokemon.id);
+  });
   poke_card.innerHTML = poke_cardHTML;
   poke_container.appendChild(poke_card);
 }
+
+const getPokemonOnClick = async (query) => {
+  const url = `https://pokeapi.co/api/v2/pokemon/${query}`;
+  const response = await fetch(url);
+  const pokemon = await response.json();
+  console.log(pokemon);
+  console.log(pokemon.name);
+};
 
 function createPokemonImage(pokeID, innerbox) {
   let pokemonImage = document.createElement("img");
@@ -76,10 +94,16 @@ function createPokemonImage(pokeID, innerbox) {
   innerbox.appendChild(pokemonImage);
 }
 
-// get userid from mongodb database test, collection test
-const getUserID = async () => {
-  const response = await fetch("/user/id/:id");
-  const user = await response.json();
-  console.log(user);
-  return user;
-};
+function buttonPressed() {
+  //clear the container
+  poke_container.innerHTML = "";
+  document
+    .getElementById("poke_container")
+    .setAttribute("class", "poke_container");
+  // if the search bar is not empty then i = contents of the search bar
+  if (document.getElementById("search").value !== "") {
+    const i = document.getElementById("search").value;
+    console.log(i);
+    getPokemon(i);
+  }
+}

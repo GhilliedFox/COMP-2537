@@ -7,6 +7,7 @@ const config = require("config");
 const morgan = require("morgan");
 const session = require("express-session");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 // Routes
 const viewsRouter = require("./routes/views");
@@ -30,6 +31,9 @@ const createServer = () => {
       secret,
       resave: false,
       saveUninitialized: true,
+      store: store,
+      unset: "destroy",
+      name: "session cookie name",
     })
   );
 
@@ -45,6 +49,42 @@ const createServer = () => {
   app.use("/", viewsRouter.router);
   app.use("/api/v1", apiv1Router.router);
 
+  // testing stuff
+  app.put("/shoppingCart/insert", function (req, res) {
+    console.log(req.body);
+    eventModel.create(
+      {
+        text: req.body.text,
+        time: req.body.time,
+        price: req.body.price,
+      },
+      function (err, data) {
+        if (err) {
+          console.log("Error " + err);
+        } else {
+          console.log("Data " + data);
+        }
+        res.send(data);
+      }
+    );
+  });
+
+  app.get("/shoppingCart/remove/:id", function (req, res) {
+    eventModel.remove(
+      {
+        _id: req.params.id,
+      },
+      function (err, data) {
+        if (err) {
+          console.log("Error " + err);
+        } else {
+          console.log("Data " + data);
+        }
+        res.send("Delete is good!");
+      }
+    );
+  });
+  // leave this item alone
   return app;
 };
 
