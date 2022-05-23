@@ -77,3 +77,23 @@ function calculateTotal() {
   $("#total").html("<h1>" + "Amount due in full = $" + total + "</h1>");
 }
 calculateTotal();
+
+function redirect() {
+  //   const checkOutRef = document.querySelector("#checkout");
+  //   const priceRef = document.querySelector("div[name='total']");
+
+  //   checkOutRef.onclick = (e) => {
+  //     e.preventDefault();
+
+  //     const price = priceRef.value;
+  //     fetch("/api/v1/cart/shoppingCart", {
+  //       method: "post",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ price }),
+  //     })
+  //       .then((data) => data.json())
+  //       .then((data) => {
+  return (window.location.href = "/");
+}
+
+//on click of the button, redirect to the profile page
