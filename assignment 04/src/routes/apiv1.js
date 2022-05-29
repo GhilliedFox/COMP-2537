@@ -23,6 +23,8 @@ router.get("/user/logout", UserController.logout);
 router.post("/user/login", UserController.login);
 router.post("/user/register", UserController.register);
 router.post("/user/delete", UserController.deleteUser);
+router.post("/user/update/email", UserController.updateEmail);
+router.post("/user/register/admin", UserController.registerAdmin);
 
 // Salary
 router.get("/salary", SalaryController.fetchAllSalaries);

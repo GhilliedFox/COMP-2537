@@ -47,6 +47,28 @@ const deleteUser = async (req, res) => {
   }
 };
 
+//update user email
+const updateEmail = async (req, res) => {
+  const { email } = req.body;
+  const { uid } = req.session;
+  try {
+    await UserModel.updateOne({ _id: uid }, { email });
+    res.status(200).json({
+      success: true,
+      data: {
+        msg: "Successfully updated email",
+      },
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      data: {
+        msg: e.message,
+      },
+    });
+  }
+};
+
 const fetchUserById = async (req, res) => {
   const { id } = req.params;
 
@@ -88,6 +110,25 @@ const register = async (req, res) => {
     success: true,
     msg: "Account successfully created.",
     roles: ["member"],
+  });
+};
+
+const registerAdmin = async (req, res) => {
+  // TODO: Administrators need a special sign-up process, perhaps an admin token could be supplied with the request?
+  const { email, password } = req.body;
+
+  const user = new UserModel({
+    email: email.trim(),
+    password: password.trim(),
+    roles: ["member", "admin"],
+  });
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    msg: "Account successfully created.",
+    roles: ["member", "admin"],
   });
 };
 
@@ -147,4 +188,6 @@ module.exports = {
   renderRegistrationPage,
   renderAdminPage,
   deleteUser,
+  updateEmail,
+  registerAdmin,
 };
