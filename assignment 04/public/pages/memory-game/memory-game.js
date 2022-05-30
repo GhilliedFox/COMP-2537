@@ -5,8 +5,6 @@ let hasFlippedCard = false;
 let lockTheBoard = false;
 let firstCard, secondCard;
 
-let score = 0;
-// this is the score (put this into the database)
 let match = 0;
 
 //stopwatch timer
@@ -79,7 +77,6 @@ function flipAgain() {
 
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
-// //change img class="front-face" src="img/memory-game/front-face.png"
 const getPokemon = async (query) => {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
   const pokemon = await response.json();
