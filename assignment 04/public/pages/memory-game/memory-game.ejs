@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/pages/memory-game/memory-game.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Koulen" />
   
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -19,13 +21,45 @@
 <body style="padding-bottom: 10%;">
 <%- include('../_partials/navbar') %>
 <br>
-<main><p>GAME GOES IN HERE</p></main>
+<main>
+  
+  <body>
+  
+      <h3>Memory Game</h3>
+        <div class="centre-this">
+      <div class="timerDisplay">
+          <span class="timer" id="timer">00:00:00</span>
+      </div>
+      <div>
+        <label>Timer</label>
+          <input type="number" value="setTimer" id="setTimer" placeholder="enter number of seconds"/>
+      </div>
+        <div>
+            <label>Number of Pairs</label>
+          <input type="number" value="gridSize" id="gridSize" />
+        </div>
+        <div>
+            <label>Number of Pokemon</label>
+          <input type="number" value="pokemonNumber" id="pokemonNumber" />
+          </div>
+      <button id="startGame" onclick="makeCards()">Start Game</button>
+    </div>
+  
+      <div id="content" class="content">
+
+          <div class="memory-game" id="memory-game">
+
+            
+          </div>
+          </div>
+  
+          
 
 <br>
 <%- include('../_partials/footer') %>
 <script src="/scripts/global.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="/pages/memory-game/about-us.js"></script>
+<script src="/pages/memory-game/memory-game.js"></script>
 </body>
 </html>
